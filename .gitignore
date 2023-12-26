@@ -45,3 +45,6 @@ _deps
 
 # Build
 build/*
+
+# Vscode
+.vscode/settings.json
