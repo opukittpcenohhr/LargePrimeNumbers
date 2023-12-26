@@ -13,7 +13,9 @@ find_package(
 # Creating library
 include_directories(src)
 add_library(prime_numbers_library src/trial_primality_test.cpp
-                                  src/fermat_pseudoprimality_test.cpp)
+                                  src/fermat_pseudoprimality_test.cpp
+                                  src/trial_find_factor.cpp
+                                  )
 target_link_libraries(prime_numbers_library Boost::boost Boost::log
                       ${CONAN_LIBS})
 
@@ -26,6 +28,7 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(tests tests/test_fermat_pseudoprimality.cpp
-                     tests/test_trivial_primality.cpp)
+                     tests/test_trivial_primality.cpp
+                     tests/test_trivial_find_factor.cpp)
 target_link_libraries(tests prime_numbers_library GTest::gtest_main)
 gtest_discover_tests(tests)
