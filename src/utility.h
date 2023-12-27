@@ -39,4 +39,13 @@ T gcd(const T& a, const T& b) {
   }
 }
 
+template <typename T>
+T abs(const T& a) {
+  if (a >= 0) {
+    return a;
+  } else {
+    return -a;
+  }
+}
+
 }  // namespace Project

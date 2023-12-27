@@ -6,6 +6,7 @@
 
 namespace Project {
 
-bool is_fermat_pseudoprime(bigint x);
+bool is_fermat_pseudoprime(bigint x,
+                           std::vector<bigint> bases = {2, 3, 5, 7, 9, 11});
 
 }  // namespace Project
