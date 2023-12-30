@@ -14,9 +14,8 @@ find_package(
 include_directories(src)
 add_library(
   prime_numbers_library
-  src/trial_primality_test.cpp src/fermat_pseudoprimality_test.cpp
-  src/trial_find_factor.cpp src/pollard_rho_find_factor.cpp
-  src/pollard_rho_one_find_factor.cpp)
+  src/trial_primality_test.cpp
+  )
 target_link_libraries(prime_numbers_library Boost::boost Boost::log
                       ${CONAN_LIBS})
 

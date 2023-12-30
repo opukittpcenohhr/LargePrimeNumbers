@@ -13,10 +13,6 @@ TEST(TrialPrimalityTest, test) {
   test_primality_test(is_prime_trial, "is_prime_trial", false_positives, 10);
 }
 
-bool is_fermat_pseudoprime_with_default_params(bigint n) {
-  return is_fermat_pseudoprime(n);
-}
-
 TEST(FermatPseudoPrimalityTest, test) {
   using namespace Project;
   const static std::set<bigint> CARMICHAEL_NUMBERS = {
@@ -31,6 +27,9 @@ TEST(FermatPseudoPrimalityTest, test) {
       bigint("1791562810662585767521"),
   };
 
-  test_primality_test(is_fermat_pseudoprime_with_default_params,
+  constexpr auto TEST_PARAMS =
+      FermatPseudoprimalityParams<int, 6>{{2, 3, 5, 7, 9, 11}};
+
+  test_primality_test(is_fermat_pseudoprime<TEST_PARAMS>,
                       "is_fermat_pseudoprime", CARMICHAEL_NUMBERS);
 }

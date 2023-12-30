@@ -14,30 +14,24 @@ TEST(TrialFindFactorTest, test) {
   test_find_factor(find_factor_trial, "find_factor_trial", exclusions, 10);
 }
 
-std::optional<bigint> find_factor_pollard_rho_with_default_params(bigint n) {
-  return find_factor_pollard_rho(n);
-}
-
 TEST(PollardRhoFindFactorTest, test) {
   using namespace Project;
   const static std::set<bigint> exclusions = {};
+  constexpr auto TEST_PARAMS = PollardRhoParams<int, 3>{1000000, {2, 3, 5}};
 
-  test_find_factor(find_factor_pollard_rho_with_default_params,
+  test_find_factor(find_factor_pollard_rho<TEST_PARAMS>,
                    "find_factor_pollard_rho", exclusions);
 }
 
-std::optional<bigint> find_factor_pollard_rho_one_with_default_params(
-    bigint n) {
-  return find_factor_pollard_rho_one(n);
-}
-
 TEST(PollardRhoOneFindFactorTest, test) {
+  constexpr auto TEST_PARAMS = PollardRhoOneParams<int, 3>{10000, {2, 3, 5}};
+
   using namespace Project;
   const static std::set<bigint> exclusions = {
       464052305161,
       bigint("9999999940000000073359"),
   };
 
-  test_find_factor(find_factor_pollard_rho_one_with_default_params,
+  test_find_factor(find_factor_pollard_rho_one<TEST_PARAMS>,
                    "find_factor_pollard_rho_one", exclusions);
 }
