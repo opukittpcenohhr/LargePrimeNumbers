@@ -4,6 +4,7 @@
     "words": [
         "primality",
         "pseudoprime",
+        "pseudoprimality",
         "multiprecision",
         "powmod",
         "addmod",
