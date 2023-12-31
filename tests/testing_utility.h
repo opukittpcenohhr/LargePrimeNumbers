@@ -68,7 +68,7 @@ void test_find_factor(
       INFO() << "Testing " << find_factor_test_name << ", number: " << number;
       auto some_factor = find_factor(number);
       EXPECT_EQ(some_factor.has_value(), true);
-      EXPECT_NE(some_factor.value(), 0);
+      EXPECT_NE(some_factor.value(), 1);
       EXPECT_NE(some_factor.value(), number);
       EXPECT_EQ(number % some_factor.value(), 0);
       INFO() << "Found factor: " << some_factor.value();
