@@ -20,9 +20,9 @@ bool is_fermat_pseudoprime(bigint n) {
     DEBUG() << "trying base " << base;
     if (gcd(base, n) != 1) {
       // We know, that either base == n or n is not prime
-      // although we are cant simply check this two cases (and probably return
+      // although we cant simply check this two cases (and probably return
       // false), since number is considered pseudoprime, only if it pseudoprime
-      // for all relatively composite bases, and this is not the case
+      // for all relatively prime bases, and this is not the case
       continue;
     }
     auto predicate_value = powmod<bigint>(base, n - 1, n);

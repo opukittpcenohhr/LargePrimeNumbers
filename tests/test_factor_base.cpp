@@ -4,6 +4,7 @@
 #include "find_congruence.h"
 #include "find_factor_base.h"
 #include "legendre_symbol.h"
+#include "utility.h"
 
 using namespace Project;
 

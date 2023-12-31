@@ -32,7 +32,7 @@ class F2Matrix {
   friend std::ostream& operator<<(std::ostream& os, const F2Matrix& matrix) {
     for (size_t i = 0; i < N; ++i) {
       for (size_t j = 0; j < M; ++j) {
-        os << matrix[i][j] << " ";
+        os << matrix[i][j];
       }
       os << std::endl;
     }

@@ -7,14 +7,29 @@ T addmod(const T& a, const T& b, const T& mod) {
   return (a + b) % mod;
 }
 
+template <>
+inline int addmod<int>(const int& x, const int& y, const int& p) {
+  return static_cast<int>(addmod<long long>(x, y, p));
+}
+
 template <typename T>
 T submod(const T& a, const T& b, const T& mod) {
   return ((a - b) % mod + mod) % mod;
 }
 
+template <>
+inline int submod<int>(const int& x, const int& y, const int& p) {
+  return static_cast<int>(submod<long long>(x, y, p));
+}
+
 template <typename T>
 T mulmod(const T& a, const T& b, const T& mod) {
   return (a * b) % mod;
+}
+
+template <>
+inline int mulmod<int>(const int& x, const int& y, const int& p) {
+  return static_cast<int>(mulmod<long long>(x, y, p));
 }
 
 template <typename T>
