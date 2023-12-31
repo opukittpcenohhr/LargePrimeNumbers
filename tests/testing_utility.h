@@ -51,11 +51,16 @@ template <FindFactor FindFactorFunc>
 void test_find_factor(
     FindFactorFunc find_factor, std::string find_factor_test_name,
     const std::set<bigint>& exclusions,
+    std::optional<size_t> min_number_len_to_test = std::nullopt,
     std::optional<size_t> max_number_len_to_test = std::nullopt) {
   set_log_level_for_tests();
   for (auto [number_str, is_prime] : PRIMES_DATA) {
     if (max_number_len_to_test.has_value() &&
         number_str.size() > max_number_len_to_test.value()) {
+      continue;
+    }
+    if (min_number_len_to_test.has_value() &&
+        number_str.size() < min_number_len_to_test.value()) {
       continue;
     }
     auto number = bigint(number_str);
