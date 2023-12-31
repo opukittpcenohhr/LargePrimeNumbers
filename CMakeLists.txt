@@ -13,7 +13,11 @@ find_package(
 
 # Creating library
 include_directories(src src/quadratic_sieve src/dixons_algorithm)
-add_library(prime_numbers_library src/trial_primality_test.cpp)
+add_library(
+  prime_numbers_library
+  src/trial_primality_test.cpp src/legendre_symbol.cpp
+  src/trial_find_factor.cpp src/quadratic_sieve/find_congruence.cpp
+  src/quadratic_sieve/find_factor_base.cpp)
 target_link_libraries(prime_numbers_library Boost::boost Boost::log
                       ${CONAN_LIBS})
 
@@ -26,7 +30,8 @@ enable_testing()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(
-  tests tests/test_find_factors.cpp tests/test_primality_tests.cpp
-        tests/test_gaussian_elemination_algorithm.cpp tests/test_factor_base.cpp)
+  tests
+  tests/test_find_factors.cpp tests/test_primality_tests.cpp
+  tests/test_gaussian_elemination_algorithm.cpp tests/test_factor_base.cpp)
 target_link_libraries(tests prime_numbers_library GTest::gtest_main)
 gtest_discover_tests(tests)

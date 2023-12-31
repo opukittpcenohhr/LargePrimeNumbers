@@ -16,10 +16,10 @@ inline bigint get_polynomial_value(const bigint& r, const bigint& n) {
   return mulmod(r, r, n);
 }
 
+// factorizes g(r) = r * r mod n over factor base
 inline bigint perform_polynomial_factorization_over_factor_base(
     const bigint& r, const bigint& n, std::vector<int>& factorization_powers,
     const std::vector<int>& factor_base) {
-  // factorizes g(r) = r * r mod n over factor base
   std::fill(factorization_powers.begin(), factorization_powers.end(), 0);
   bigint g_r = get_polynomial_value(r, n);
   assert(g_r < n);
