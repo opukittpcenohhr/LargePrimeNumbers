@@ -22,9 +22,9 @@ T powmod(T a, T b, const T& mod) {
   T res = 1;
   while (b > 0) {
     if (b % 2 == 1) {
-      res = mulmod(res, a, mod);
+      res = mulmod<T>(res, a, mod);
     }
-    a = mulmod(a, a, mod);
+    a = mulmod<T>(a, a, mod);
     b = b / 2;
   }
   return res;
@@ -45,6 +45,16 @@ T abs(const T& a) {
     return a;
   } else {
     return -a;
+  }
+}
+
+template <typename T>
+std::optional<T> check_potential_factor(const T& n, const T& factor) {
+  T g = gcd(n, factor);
+  if (g != 1 && g != n) {
+    return g;
+  } else {
+    return std::nullopt;
   }
 }
 

@@ -7,7 +7,7 @@
 
 namespace Project {
 
-std::optional<bigint> find_factor_trial(bigint n) {
+inline std::optional<bigint> find_factor_trial(bigint n) {
   for (bigint i = 2; i * i <= n; i++) {
     if (n % i == 0) {
       return i;
