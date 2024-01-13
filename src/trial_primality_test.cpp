@@ -4,7 +4,7 @@
 
 #include "common.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 bool is_prime_trial(bigint x) {
   for (bigint i = 2; i * i <= x; i++) {
@@ -15,4 +15,4 @@ bool is_prime_trial(bigint x) {
   return true;
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

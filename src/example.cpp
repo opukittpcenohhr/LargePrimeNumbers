@@ -7,7 +7,7 @@
 
 int main() {
   using namespace boost::multiprecision;
-  using namespace Project;
+  using namespace LargePrimeNumbers;
   using namespace std;
 
   constexpr auto params = QuadraticSieveParams{2000, 50000000, 2.0};

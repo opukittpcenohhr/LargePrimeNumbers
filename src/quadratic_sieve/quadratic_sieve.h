@@ -10,7 +10,7 @@
 #include "find_factor_base.h"
 #include "logging.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 struct QuadraticSieveParams {
   const size_t factor_base_size;
@@ -69,4 +69,4 @@ std::optional<bigint> find_factor_quadratic_sieve(bigint n) {
   return find_factor_dixon<params.factor_base_size>(n, candidates, factor_base);
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

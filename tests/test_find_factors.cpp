@@ -6,7 +6,7 @@
 #include "testing_utility.h"
 #include "trial_find_factor.h"
 
-using namespace Project;
+using namespace LargePrimeNumbers;
 
 TEST(TrialFindFactorTest, test) {
   const static std::set<bigint> exclusions = {};

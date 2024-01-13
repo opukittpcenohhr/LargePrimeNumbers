@@ -8,7 +8,7 @@
 #include "logging.h"
 #include "utility.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 std::vector<int> find_factor_base(bigint n, size_t factors_count) {
   // 100 * factors_count should be enough, since there is around n / ln(n) prime
@@ -37,4 +37,4 @@ std::vector<int> find_factor_base(bigint n, size_t factors_count) {
   return result;
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

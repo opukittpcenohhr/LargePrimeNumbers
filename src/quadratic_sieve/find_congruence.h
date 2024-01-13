@@ -6,11 +6,11 @@
 
 #include "common.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 // find x, such as x^2 = n (mod p)
 int find_congruence(bigint n, int p);
 
 std::vector<int> find_all_congruences(bigint n, int p);
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

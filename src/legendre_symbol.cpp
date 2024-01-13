@@ -6,7 +6,7 @@
 #include "common.h"
 #include "utility.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 int find_legendre_symbol(bigint n, int p) {
   if (n % p == 0) {
@@ -21,4 +21,4 @@ int find_legendre_symbol(bigint n, int p) {
   }
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

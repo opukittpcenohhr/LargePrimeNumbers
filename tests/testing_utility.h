@@ -9,7 +9,7 @@
 #include "logging.h"
 #include "primes_data.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 template <typename T>
 concept PrimalityTest = requires(T func, const bigint& arg) {
@@ -76,4 +76,4 @@ void test_find_factor(
   }
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

@@ -6,7 +6,7 @@
 
 #include "logging.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 template <size_t N, size_t M>
 class F2Matrix {
@@ -65,4 +65,4 @@ void perform_gaussian_elimination(F2Matrix<N, M>& matrix,
   }
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

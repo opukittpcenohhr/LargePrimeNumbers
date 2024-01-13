@@ -10,7 +10,7 @@
 #include "logging.h"
 #include "utility.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 namespace {
 
@@ -72,4 +72,4 @@ std::vector<int> find_all_congruences(bigint n, int p) {
   }
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

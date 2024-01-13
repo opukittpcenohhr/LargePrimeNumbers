@@ -4,8 +4,8 @@
 
 #include "common.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 bool is_prime_trial(bigint x);
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers
