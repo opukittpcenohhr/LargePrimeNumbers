@@ -5,8 +5,8 @@
 
 #include "common.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 int find_legendre_symbol(bigint n, int p);
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

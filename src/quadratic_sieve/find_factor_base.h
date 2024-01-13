@@ -5,8 +5,8 @@
 
 #include "common.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 std::vector<int> find_factor_base(bigint n, size_t factors_count);
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

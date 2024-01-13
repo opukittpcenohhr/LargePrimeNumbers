@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 template <typename T>
 T addmod(const T& a, const T& b, const T& mod) {
@@ -73,4 +73,4 @@ std::optional<T> check_potential_factor(const T& n, const T& factor) {
   }
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

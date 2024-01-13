@@ -5,7 +5,7 @@
 #include "logging.h"
 #include "utility.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 template <typename BasesType, size_t start_values_count>
 struct PollardRhoParams {
@@ -52,4 +52,4 @@ std::optional<bigint> find_factor_pollard_rho(bigint n) {
             << n;
   return std::nullopt;
 }
-}  // namespace Project
+}  // namespace LargePrimeNumbers

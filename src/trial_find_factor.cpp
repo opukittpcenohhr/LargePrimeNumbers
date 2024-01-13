@@ -5,7 +5,7 @@
 
 #include "common.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 std::optional<bigint> find_factor_trial(bigint n) {
   for (bigint i = 2; i * i <= n; i++) {
@@ -16,4 +16,4 @@ std::optional<bigint> find_factor_trial(bigint n) {
   return std::nullopt;
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

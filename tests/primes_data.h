@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 const std::map<std::string, bool> PRIMES_DATA = {
     {"2", true},

@@ -10,7 +10,7 @@
 #include "logging.h"
 #include "utility.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 inline bigint get_polynomial_value(const bigint& r, const bigint& n) {
   return mulmod(r, r, n);
@@ -102,4 +102,4 @@ std::optional<bigint> find_factor_dixon(bigint n,
   return std::nullopt;
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

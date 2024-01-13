@@ -4,17 +4,17 @@
 #include "testing_utility.h"
 #include "trial_primality_test.h"
 
-using namespace Project;
+using namespace LargePrimeNumbers;
 
 TEST(TrialPrimalityTest, test) {
-  using namespace Project;
+  using namespace LargePrimeNumbers;
   const static std::set<bigint> false_positives = {};
 
   test_primality_test(is_prime_trial, "is_prime_trial", false_positives, 10);
 }
 
 TEST(FermatPseudoPrimalityTest, test) {
-  using namespace Project;
+  using namespace LargePrimeNumbers;
   const static std::set<bigint> CARMICHAEL_NUMBERS = {
       561,
       29341,

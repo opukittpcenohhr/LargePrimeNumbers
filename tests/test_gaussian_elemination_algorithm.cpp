@@ -2,7 +2,7 @@
 
 #include "f2_matrix.h"
 
-using namespace Project;
+using namespace LargePrimeNumbers;
 
 TEST(GaussianEliminationTest, test) {
   auto matrix = F2Matrix<3, 3>();

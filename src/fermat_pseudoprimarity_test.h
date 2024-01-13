@@ -6,7 +6,7 @@
 #include "logging.h"
 #include "utility.h"
 
-namespace Project {
+namespace LargePrimeNumbers {
 
 template <typename BasesType, size_t bases_count>
 struct FermatPseudoprimalityParams {
@@ -35,4 +35,4 @@ bool is_fermat_pseudoprime(bigint n) {
   return true;
 }
 
-}  // namespace Project
+}  // namespace LargePrimeNumbers

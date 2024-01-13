@@ -6,7 +6,7 @@
 #include "legendre_symbol.h"
 #include "utility.h"
 
-using namespace Project;
+using namespace LargePrimeNumbers;
 
 namespace {
 const bigint QUADRATIC_SIEVE_TEST_N = bigint("4999486012441");
