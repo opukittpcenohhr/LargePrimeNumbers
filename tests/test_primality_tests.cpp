@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "fermat_pseudoprimarity_test.h"
+#include "strong_pseudoprimality_test.h"
 #include "testing_utility.h"
 #include "trial_primality_test.h"
 
@@ -13,7 +14,7 @@ TEST(TrialPrimalityTest, test) {
   test_primality_test(is_prime_trial, "is_prime_trial", false_positives, 10);
 }
 
-TEST(FermatPseudoPrimalityTest, test) {
+TEST(FermatPseudoprimalityTest, test) {
   using namespace LargePrimeNumbers;
   const static std::set<bigint> CARMICHAEL_NUMBERS = {
       561,
@@ -32,4 +33,15 @@ TEST(FermatPseudoPrimalityTest, test) {
 
   test_primality_test(is_fermat_pseudoprime<TEST_PARAMS>,
                       "is_fermat_pseudoprime", CARMICHAEL_NUMBERS);
+}
+
+TEST(StrongPseudoprimalityTest, test) {
+  using namespace LargePrimeNumbers;
+  const static std::set<bigint> false_positives = {};
+
+  constexpr auto TEST_PARAMS =
+      StrongPseudoprimalityParams<int, 6>{{2, 3, 5, 7, 9, 11}};
+
+  test_primality_test(is_strong_pseudoprime<TEST_PARAMS>,
+                      "is_strong_pseudoprime", false_positives);
 }
