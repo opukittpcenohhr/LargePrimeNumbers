@@ -1,18 +1,12 @@
 #include "trial_primality_test.h"
 
-#include <boost/multiprecision/cpp_int.hpp>
-
 #include "common.h"
+#include "trial_find_factor.h"
 
 namespace LargePrimeNumbers {
 
-bool is_prime_trial(bigint x) {
-  for (bigint i = 2; i * i <= x; i++) {
-    if (x % i == 0) {
-      return false;
-    }
-  }
-  return true;
+bool is_prime_trial(const bigint& x) {
+  return !find_factor_trial(x).has_value();
 }
 
 }  // namespace LargePrimeNumbers

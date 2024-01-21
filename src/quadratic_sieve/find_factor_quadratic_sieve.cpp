@@ -1,29 +1,18 @@
-#pragma once
+#include "find_factor_quadratic_sieve.h"
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
-#include <boost/multiprecision/cpp_int.hpp>
 #include <optional>
 
 #include "common.h"
 #include "dixons_algorithm.h"
 #include "find_congruence.h"
 #include "find_factor_base.h"
-#include "logging.h"
 
 namespace LargePrimeNumbers {
 
-struct QuadraticSieveParams {
-  const size_t factor_base_size;
-  const size_t M;
-  const double T;
-};
-
-template <QuadraticSieveParams params>
-std::optional<bigint> find_factor_quadratic_sieve(bigint n) {
-  using namespace std;
-  auto factor_base = find_factor_base(n, params.factor_base_size);
-  INFO() << "factor base found, max factor base: " << factor_base.back();
-
+std::vector<bigint> perform_sieving(const bigint& n,
+                                    const std::vector<size_t>& factor_base,
+                                    const QuadraticSieveParams& params) {
   auto s = boost::multiprecision::sqrt(n) + 1;
   // We are considering a segment of [s, ... s + 2 * M)
   // so index i in array corresponds to r = i + s, and value to factor is f(r) =
@@ -47,7 +36,6 @@ std::optional<bigint> find_factor_quadratic_sieve(bigint n) {
       }
     }
   }
-  INFO() << "sieving done";
 
   auto n_log =
       boost::multiprecision::log(boost::multiprecision::cpp_dec_float_100(n))
@@ -55,18 +43,28 @@ std::optional<bigint> find_factor_quadratic_sieve(bigint n) {
   // approximation of log(max(f(r)))
   double target = (n_log) / 2 + log(2 * params.M);
   double threshold = target - params.T * log(factor_base.back());
-  DEBUG() << "target: " << target << " threshold: " << threshold;
+  BOOST_LOG_TRIVIAL(debug) << "target: " << target
+                           << " threshold: " << threshold;
 
   std::vector<bigint> candidates;
 
   for (size_t index = 0; index < 2 * params.M; index++) {
     if (prime_factors_log_sum[index] >= threshold) {
-      candidates.push_back(index + s);
+      candidates.emplace_back(index + s);
     }
   }
-  INFO() << "found " << candidates.size() << " candidates";
+  return candidates;
+}
 
-  return find_factor_dixon<params.factor_base_size>(n, candidates, factor_base);
+std::optional<bigint> find_factor_quadratic_sieve(
+    const bigint& n, const QuadraticSieveParams& params) {
+  using namespace std;
+  auto factor_base = find_factor_base(n, params.factor_base_size);
+  BOOST_LOG_TRIVIAL(info) << "factor base found, max factor base: "
+                          << factor_base.back();
+  auto candidates = perform_sieving(n, factor_base, params);
+  BOOST_LOG_TRIVIAL(info) << "found " << candidates.size() << " candidates";
+  return find_factor_dixon(n, candidates, factor_base);
 }
 
 }  // namespace LargePrimeNumbers

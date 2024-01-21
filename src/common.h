@@ -1,9 +1,10 @@
 #pragma once
 
+#include <boost/log/trivial.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
 namespace LargePrimeNumbers {
 
-typedef boost::multiprecision::cpp_int bigint;
+using bigint = boost::multiprecision::cpp_int;
 
 }

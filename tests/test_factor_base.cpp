@@ -6,12 +6,12 @@
 #include "legendre_symbol.h"
 #include "utility.h"
 
-using namespace LargePrimeNumbers;
+namespace LargePrimeNumbers {
 
 namespace {
-const bigint QUADRATIC_SIEVE_TEST_N = bigint("4999486012441");
-const std::vector<int> EXPECTED_FACTOR_BASES = {2,  3,  5,  7,  17,
-                                                19, 31, 43, 47, 59};
+const bigint kQuadraticSieveN = bigint("4999486012441");
+const std::vector<size_t> kExpectedFactorBases = {2,  3,  5,  7,  17,
+                                                  19, 31, 43, 47, 59};
 }  // namespace
 
 TEST(LegendreSymbolTest, test) {
@@ -25,23 +25,22 @@ TEST(LegendreSymbolTest, test) {
 }
 
 TEST(FindFactorBaseTest, test) {
-  EXPECT_EQ(
-      find_factor_base(QUADRATIC_SIEVE_TEST_N, size(EXPECTED_FACTOR_BASES)),
-      EXPECTED_FACTOR_BASES);
+  EXPECT_EQ(find_factor_base(kQuadraticSieveN, size(kExpectedFactorBases)),
+            kExpectedFactorBases);
 }
 
 TEST(FindCongruenceTest, test) {
-  auto test = [](bigint n, int p) {
-    int n_residue_modulo_p = (n % p).convert_to<int>();
+  auto test = [](const bigint &n, const bigint &p) {
     auto congruences = find_all_congruences(n, p);
     for (auto congruence : congruences) {
-      EXPECT_EQ(n_residue_modulo_p,
-                mulmod<long long>(congruence, congruence, p));
+      EXPECT_EQ(n % p, mulmod(congruence, congruence, p));
     }
   };
 
-  for (auto p : EXPECTED_FACTOR_BASES) {
-    test(QUADRATIC_SIEVE_TEST_N, p);
+  for (auto p : kExpectedFactorBases) {
+    test(kQuadraticSieveN, p);
   }
   test(bigint("59469489332848408438249254427481121839977"), 48679);
 }
+
+}  // namespace LargePrimeNumbers

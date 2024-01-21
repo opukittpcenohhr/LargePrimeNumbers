@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cassert>
+
 namespace LargePrimeNumbers {
 
 template <typename T>
@@ -7,19 +9,9 @@ T addmod(const T& a, const T& b, const T& mod) {
   return (a + b) % mod;
 }
 
-template <>
-inline int addmod<int>(const int& x, const int& y, const int& p) {
-  return static_cast<int>(addmod<long long>(x, y, p));
-}
-
 template <typename T>
 T submod(const T& a, const T& b, const T& mod) {
   return ((a - b) % mod + mod) % mod;
-}
-
-template <>
-inline int submod<int>(const int& x, const int& y, const int& p) {
-  return static_cast<int>(submod<long long>(x, y, p));
 }
 
 template <typename T>
@@ -27,13 +19,9 @@ T mulmod(const T& a, const T& b, const T& mod) {
   return (a * b) % mod;
 }
 
-template <>
-inline int mulmod<int>(const int& x, const int& y, const int& p) {
-  return static_cast<int>(mulmod<long long>(x, y, p));
-}
-
 template <typename T>
 T powmod(T a, T b, const T& mod) {
+  assert(b >= 0);
   T res = 1;
   while (b > 0) {
     if (b % 2 == 1) {
@@ -56,15 +44,13 @@ T gcd(const T& a, const T& b) {
 
 template <typename T>
 T abs(const T& a) {
-  if (a >= 0) {
-    return a;
-  } else {
-    return -a;
-  }
+  return a * (a > 0) - a * (a < 0);
 }
 
 template <typename T>
 std::optional<T> check_potential_factor(const T& n, const T& factor) {
+  assert(n >= 1);
+  assert(factor >= 1);
   T g = gcd(n, factor);
   if (g != 1 && g != n) {
     return g;
