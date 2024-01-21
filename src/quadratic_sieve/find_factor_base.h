@@ -1,12 +1,9 @@
 #pragma once
 
-#include <boost/multiprecision/cpp_int.hpp>
-#include <optional>
-
 #include "common.h"
 
 namespace LargePrimeNumbers {
 
-std::vector<int> find_factor_base(bigint n, size_t factors_count);
+std::vector<size_t> find_factor_base(const bigint& n, size_t factors_count);
 
 }  // namespace LargePrimeNumbers

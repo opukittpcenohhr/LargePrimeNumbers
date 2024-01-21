@@ -1,11 +1,9 @@
 #pragma once
 
-#include <boost/multiprecision/cpp_int.hpp>
-
 #include "common.h"
 
 namespace LargePrimeNumbers {
 
-bool is_prime_trial(bigint x);
+bool is_prime_trial(const bigint& x);
 
 }  // namespace LargePrimeNumbers

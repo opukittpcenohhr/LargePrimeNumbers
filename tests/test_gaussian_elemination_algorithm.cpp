@@ -2,10 +2,10 @@
 
 #include "f2_matrix.h"
 
-using namespace LargePrimeNumbers;
+namespace LargePrimeNumbers {
 
 TEST(GaussianEliminationTest, test) {
-  auto matrix = F2Matrix<3, 3>();
+  auto matrix = F2Matrix(3, 3);
   matrix[0][0] = 0;
   matrix[0][1] = 0;
   matrix[0][2] = 1;
@@ -31,3 +31,5 @@ TEST(GaussianEliminationTest, test) {
   EXPECT_EQ(matrix[2][1], 0);
   EXPECT_EQ(matrix[2][2], 1);
 }
+
+}  // namespace LargePrimeNumbers

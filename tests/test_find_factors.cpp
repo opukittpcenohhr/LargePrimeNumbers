@@ -1,12 +1,16 @@
 #include <gtest/gtest.h>
 
+#include "find_factor_quadratic_sieve.h"
 #include "pollard_rho_find_factor.h"
 #include "pollard_rho_one_find_factor.h"
-#include "quadratic_sieve.h"
 #include "testing_utility.h"
 #include "trial_find_factor.h"
 
 using namespace LargePrimeNumbers;
+
+namespace {
+const bigint kBigNumberThreshold = boost::multiprecision::pow(bigint(10), 30);
+}
 
 TEST(TrialFindFactorTest, test) {
   const static std::set<bigint> exclusions = {};
@@ -16,30 +20,40 @@ TEST(TrialFindFactorTest, test) {
 }
 
 TEST(PollardRhoFindFactorTest, test) {
-  const static std::set<bigint> exclusions = {};
-  constexpr auto TEST_PARAMS = PollardRhoParams<int, 3>{1000000, {2, 3, 5}};
+  auto kTestParams = PollardRhoParams{1000000, {2, 3, 5}};
+  const std::set<bigint> kExclusions = {};
 
-  test_find_factor(find_factor_pollard_rho<TEST_PARAMS>,
-                   "find_factor_pollard_rho", exclusions, std::nullopt, 30);
+  auto test_find_factor_pollard_rho = [&kTestParams](const bigint &n) {
+    return find_factor_pollard_rho(n, kTestParams);
+  };
+  test_find_factor(test_find_factor_pollard_rho, "find_factor_pollard_rho",
+                   kExclusions, std::nullopt, kBigNumberThreshold);
 }
 
 TEST(PollardRhoOneFindFactorTest, test) {
-  constexpr auto TEST_PARAMS = PollardRhoOneParams<int, 3>{10000, {2, 3, 5}};
-
-  const static std::set<bigint> exclusions = {
+  auto kTestParams = PollardRhoOneParams{10000, {2, 3, 5}};
+  const std::set<bigint> kExclusions = {
       464052305161,
       bigint("9999999940000000073359"),
   };
 
-  test_find_factor(find_factor_pollard_rho_one<TEST_PARAMS>,
-                   "find_factor_pollard_rho_one", exclusions, std::nullopt, 30);
+  auto test_find_factor_pollard_rho_one = [&kTestParams](const bigint &n) {
+    return find_factor_pollard_rho_one(n, kTestParams);
+  };
+  test_find_factor(test_find_factor_pollard_rho_one,
+                   "find_factor_pollard_rho_one", kExclusions, std::nullopt,
+                   kBigNumberThreshold);
 }
 
 TEST(QuadraticSieveFactorTest, test) {
-  constexpr auto LARGE_TESTS_PARAMS = QuadraticSieveParams{2000, 50000000, 2.0};
-  const static std::set<bigint> LARGE_TEST_EXCLUSIONS = {};
+  constexpr auto kTestParams = QuadraticSieveParams{2000, 50000000, 2.0};
+  const std::set<bigint> kExclusions = {};
 
-  test_find_factor(find_factor_quadratic_sieve<LARGE_TESTS_PARAMS>,
-                   "find_factor_quadratic_sieve", LARGE_TEST_EXCLUSIONS, 30,
-                   std::nullopt);
+  auto test_find_factor_quadratic_sieve = [&kTestParams](const bigint &n) {
+    return find_factor_quadratic_sieve(n, kTestParams);
+  };
+
+  test_find_factor(test_find_factor_quadratic_sieve,
+                   "find_factor_quadratic_sieve", kExclusions,
+                   kBigNumberThreshold, std::nullopt);
 }

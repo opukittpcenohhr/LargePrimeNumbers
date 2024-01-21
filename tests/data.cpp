@@ -1,11 +1,10 @@
-#pragma once
+#include "data.h"
 
 #include <map>
 #include <string>
 
-namespace LargePrimeNumbers {
-
-const std::map<std::string, bool> PRIMES_DATA = {
+namespace {
+const std::map<std::string, bool> kPrimeNumbersData = {
     {"2", true},
     {"3", true},
     {"5", true},
@@ -45,5 +44,16 @@ const std::map<std::string, bool> PRIMES_DATA = {
     {"59469489332848408438249254427481121839977",
      false}  // 175656509371887105761 * 338555568168236555657,
 };
-
 }
+
+namespace LargePrimeNumbers {
+
+std::map<bigint, bool> get_prime_numbers_data() {
+  std::map<bigint, bool> result;
+  for (auto [number_str, is_prime] : kPrimeNumbersData) {
+    result[bigint(number_str)] = is_prime;
+  }
+  return result;
+}
+
+}  // namespace LargePrimeNumbers
