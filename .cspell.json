@@ -4,11 +4,15 @@
     "words": [
         "primality",
         "pseudoprime",
+        "pseudoprimes",
         "pseudoprimality",
         "multiprecision",
         "powmod",
         "addmod",
         "mulmod",
-        "submod"
+        "submod",
+        "matplot",
+        "xlabel",
+        "ylabel"
     ]
 }
