@@ -18,7 +18,8 @@ find_package(
   COMPONENTS log
   REQUIRED)
 
-# Creating library
+find_package(Matplot++ REQUIRED)
+
 include_directories(
   src
   src/quadratic_sieve
@@ -46,18 +47,7 @@ add_library(
 target_link_libraries(prime_numbers_library Boost::boost Boost::log
                       ${CONAN_LIBS})
 
-# Creating example
-add_executable(example src/example.cpp)
-target_link_libraries(example prime_numbers_library)
 
-# Testing
-enable_testing()
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
-add_executable(
-  tests
-  tests/test_find_factors.cpp tests/test_primality_tests.cpp
-  tests/test_gaussian_elemination_algorithm.cpp tests/test_factor_base.cpp
-  tests/data.cpp)
-target_link_libraries(tests prime_numbers_library GTest::gtest_main)
-gtest_discover_tests(tests)
+add_subdirectory("benchmarks")
+add_subdirectory("example")
+add_subdirectory("tests")

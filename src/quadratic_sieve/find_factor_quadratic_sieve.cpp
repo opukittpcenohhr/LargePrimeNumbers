@@ -17,7 +17,6 @@ std::vector<bigint> perform_sieving(const bigint& n,
   // We are considering a segment of [s, ... s + 2 * M)
   // so index i in array corresponds to r = i + s, and value to factor is f(r) =
   // r * r mod n
-  // We use unique_ptr to allocate array on heap, not stack
   auto prime_factors_log_sum = std::vector<double>(2 * params.M);
 
   for (auto p : factor_base) {
