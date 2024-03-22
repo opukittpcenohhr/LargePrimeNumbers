@@ -7,7 +7,7 @@
 namespace LargePrimeNumbers {
 
 class RandomBigintGenerator {
- public:
+public:
   RandomBigintGenerator(int seed) : mt_(seed) {}
 
   // generate random number in [min, max]
@@ -17,7 +17,7 @@ class RandomBigintGenerator {
     return gen(mt_);
   }
 
- private:
+private:
   boost::mt19937 mt_;
 };
 

@@ -13,8 +13,8 @@ namespace LargePrimeNumbers {
 
 inline void set_log_level_for_tests() {
   namespace logging = boost::log;
-  logging::core::get()->set_filter(logging::trivial::severity >=
-                                   logging::trivial::info);
+  logging::core::get()->set_filter(
+      logging::trivial::severity >= logging::trivial::info);
 }
 
 template <PrimalityTest PrimalityTestFunc>
@@ -39,11 +39,11 @@ void test_primality_test(
 }
 
 template <FindFactor FindFactorFunc>
-void test_find_factor(FindFactorFunc find_factor,
-                      const std::string& find_factor_test_name,
-                      const std::set<bigint>& exclusions,
-                      std::optional<bigint> min_number_to_test = std::nullopt,
-                      std::optional<bigint> max_number_to_test = std::nullopt) {
+void test_find_factor(
+    FindFactorFunc find_factor, const std::string& find_factor_test_name,
+    const std::set<bigint>& exclusions,
+    std::optional<bigint> min_number_to_test = std::nullopt,
+    std::optional<bigint> max_number_to_test = std::nullopt) {
   set_log_level_for_tests();
   auto data = get_prime_numbers_data();
   for (const auto& test_case : data) {

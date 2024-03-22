@@ -19,9 +19,8 @@ struct PollardRhoOneResult {
 // Preconditions:
 // n is known composite
 // n is co-prime to start_value
-PollardRhoOneResult pollard_rho_one(const bigint& n,
-                                    std::optional<size_t> max_iterations,
-                                    int base);
+PollardRhoOneResult pollard_rho_one(
+    const bigint& n, std::optional<size_t> max_iterations, int base);
 
 // Preconditions:
 // n is known composite
