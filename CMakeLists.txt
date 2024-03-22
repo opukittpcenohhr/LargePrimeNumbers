@@ -25,6 +25,7 @@ include_directories(
   src/quadratic_sieve
   src/dixons_algorithm
   src/pollard_rho
+  src/cfrac
   src/fermat_pseudoprimality
   src/strong_pseudoprimality
   src/legendre_symbol)
@@ -42,7 +43,9 @@ add_library(
   src/legendre_symbol/legendre_symbol.cpp
   src/quadratic_sieve/find_factor_quadratic_sieve.cpp
   src/dixons_algorithm/f2_matrix.cpp
-  src/dixons_algorithm/dixons_algorithm.cpp)
+  src/dixons_algorithm/dixons_algorithm.cpp
+  src/cfrac/bhascara_brounker_sequence.cpp
+  )
 
 target_link_libraries(prime_numbers_library Boost::boost Boost::log
                       ${CONAN_LIBS})
