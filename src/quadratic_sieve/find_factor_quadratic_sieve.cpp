@@ -63,7 +63,9 @@ std::optional<bigint> find_factor_quadratic_sieve(
                           << factor_base.back();
   auto candidates = perform_sieving(n, factor_base, params);
   BOOST_LOG_TRIVIAL(info) << "found " << candidates.size() << " candidates";
-  return find_factor_dixon(n, candidates, factor_base);
+  DixonsAlgorithm dixons_algorithm(n, factor_base);
+  dixons_algorithm.process_candidates(candidates);
+  return dixons_algorithm.find_factor();
 }
 
 }  // namespace LargePrimeNumbers

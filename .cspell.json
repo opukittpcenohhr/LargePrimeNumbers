@@ -13,6 +13,7 @@
         "submod",
         "matplot",
         "xlabel",
-        "ylabel"
+        "ylabel",
+        "dixons",
     ]
 }
