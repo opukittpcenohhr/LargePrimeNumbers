@@ -33,8 +33,8 @@ void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
     for (size_t bases_count = 1; bases_count <= bases.size(); bases_count++) {
       size_t detected_primes = 0;
       for (bigint n = range_begin; n <= range_end; n++) {
-        if (primality_test(n,
-                           std::span<const int>(bases.data(), bases_count))) {
+        if (primality_test(
+                n, std::span<const int>(bases.data(), bases_count))) {
           detected_primes++;
         }
       }
@@ -58,12 +58,13 @@ void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
     matplot::ylabel("Number of pseudoprimes detected");
     std::string filename = "benchmark_charts/" + test_name +
                            "_pseudoprimality_" + range_description + ".png";
-    matplot::title("Number of pseudoprimes detected by " + test_name +
-                   " pseudoprimality test for "
-                   "different number of bases  "
-                   "for numbers in "
-                   "range " +
-                   range_description);
+    matplot::title(
+        "Number of pseudoprimes detected by " + test_name +
+        " pseudoprimality test for "
+        "different number of bases  "
+        "for numbers in "
+        "range " +
+        range_description);
     matplot::save(filename);
   }
 }
@@ -72,8 +73,8 @@ int main() {
   using namespace LargePrimeNumbers;
 
   namespace logging = boost::log;
-  logging::core::get()->set_filter(logging::trivial::severity >=
-                                   logging::trivial::info);
+  logging::core::get()->set_filter(
+      logging::trivial::severity >= logging::trivial::info);
 
   // TODO(dumnov): make this cli arguments
   std::vector<int> bases = {2, 3, 5, 7, 9};

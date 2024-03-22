@@ -6,7 +6,7 @@
 namespace LargePrimeNumbers {
 
 class F2Matrix {
- public:
+public:
   F2Matrix() = default;
 
   F2Matrix(size_t row_count, size_t column_count)
@@ -41,7 +41,7 @@ class F2Matrix {
     return a_[0].size();
   }
 
- private:
+private:
   std::vector<boost::dynamic_bitset<>> a_;
 };
 
