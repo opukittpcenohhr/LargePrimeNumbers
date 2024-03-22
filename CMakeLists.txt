@@ -45,7 +45,8 @@ add_library(
   src/dixons_algorithm/f2_matrix.cpp
   src/dixons_algorithm/dixons_algorithm.cpp
   src/cfrac/bhascara_brounker_sequence.cpp
-  )
+  src/cfrac/find_factor_cfrac.cpp
+)
 
 target_link_libraries(prime_numbers_library Boost::boost Boost::log
                       ${CONAN_LIBS})

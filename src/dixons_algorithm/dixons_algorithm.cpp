@@ -13,8 +13,9 @@ namespace LargePrimeNumbers {
 
 bigint DixonsAlgorithm::perform_polynomial_factorization_over_factor_base(
     const bigint& r) {
-  std::fill(factorization_powers_cache_.begin(),
-            factorization_powers_cache_.end(), 0);
+  std::fill(
+      factorization_powers_cache_.begin(), factorization_powers_cache_.end(),
+      0);
   bigint g_r = mulmod(r, r, n_);
   for (size_t factor_index = 0; factor_index < factor_base_.size();
        factor_index++) {
@@ -26,7 +27,7 @@ bigint DixonsAlgorithm::perform_polynomial_factorization_over_factor_base(
   return g_r;
 }
 
-void DixonsAlgorithm::factorize_over_factor_base_and_fill_powers_matrix(
+bool DixonsAlgorithm::factorize_over_factor_base_and_fill_powers_matrix(
     const bigint& r) {
   auto factorization_remainder =
       perform_polynomial_factorization_over_factor_base(r);
@@ -39,7 +40,9 @@ void DixonsAlgorithm::factorize_over_factor_base_and_fill_powers_matrix(
     }
     matrix_[i][factor_base_.size() + i] = true;
     factorized_candidates_.push_back(r);
+    return true;
   }
+  return false;
 }
 
 std::optional<bigint> DixonsAlgorithm::check_factor_candidate(size_t i) const {
@@ -58,8 +61,9 @@ std::optional<bigint> DixonsAlgorithm::check_factor_candidate(size_t i) const {
     for (size_t candidate_index = 0;
          candidate_index < factorized_candidates_.size(); candidate_index++) {
       if (matrix_[i][factor_base_.size() + candidate_index]) {
-        auto g_r = mulmod<bigint>(factorized_candidates_[candidate_index],
-                                  factorized_candidates_[candidate_index], n_);
+        auto g_r = mulmod<bigint>(
+            factorized_candidates_[candidate_index],
+            factorized_candidates_[candidate_index], n_);
         x = x * g_r;
         y = y * factorized_candidates_[candidate_index];
       }
@@ -80,8 +84,16 @@ void DixonsAlgorithm::process_candidates(std::span<const bigint> candidates) {
   }
 }
 
-void DixonsAlgorithm::process_candidate(const bigint& candidate) {
-  factorize_over_factor_base_and_fill_powers_matrix(candidate);
+bool DixonsAlgorithm::process_candidate(const bigint& candidate) {
+  if (factored_enough_candidates()) {
+    return false;
+  }
+  return factorize_over_factor_base_and_fill_powers_matrix(candidate);
+}
+
+bool DixonsAlgorithm::factored_enough_candidates() const {
+  return factorized_candidates_.size() >=
+         number_of_factored_candidates_required_;
 }
 
 std::optional<bigint> DixonsAlgorithm::find_factor() {
