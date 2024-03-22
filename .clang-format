@@ -3,3 +3,4 @@ BasedOnStyle: Google
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: Empty
 InsertNewlineAtEOF: true
+AccessModifierOffset: -2
