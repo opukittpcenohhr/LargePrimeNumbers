@@ -1,0 +1,2 @@
+add_executable(plot_stats_by_bases_count plot_stats_by_bases_count.cpp)
+target_link_libraries(plot_stats_by_bases_count prime_numbers_library Matplot++::matplot)

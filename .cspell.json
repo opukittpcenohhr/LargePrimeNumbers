@@ -1,0 +1,22 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+        "primality",
+        "pseudoprime",
+        "pseudoprimes",
+        "pseudoprimality",
+        "multiprecision",
+        "powmod",
+        "addmod",
+        "mulmod",
+        "submod",
+        "matplot",
+        "xlabel",
+        "ylabel",
+        "dixons",
+        "bhascara",
+        "brounker",
+        "cfrac"
+    ]
+}

@@ -1,0 +1,7 @@
+Language: Cpp
+BasedOnStyle: Google
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: Empty
+InsertNewlineAtEOF: true
+AccessModifierOffset: -2
+AlignAfterOpenBracket: AlwaysBreak
