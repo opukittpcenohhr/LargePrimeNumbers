@@ -28,7 +28,13 @@ void run_factorization_benchmark(
     const std::map<int, Params>& params_by_length) {
   auto test_data = get_composite_numbers_by_length();
   for (const auto& [length, data] : test_data) {
-    const auto& params = params_by_length.at(length);
+    auto params_it = params_by_length.find(length);
+    if (params_it == params_by_length.end()) {
+      BOOST_LOG_TRIVIAL(error)
+          << "No parameters found for numbers of length " << length;
+      continue;
+    }
+    auto params = params_it->second;
     std::chrono::milliseconds total_time(0);
     for (const auto& number_str : data) {
       auto current_time = execution_time(
