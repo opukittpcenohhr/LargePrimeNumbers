@@ -4,7 +4,7 @@
 #include <optional>
 
 #include "common.h"
-#include "dixons_algorithm.h"
+#include "factor_using_candidate_combination.h"
 #include "find_congruence.h"
 #include "find_factor_base.h"
 
@@ -62,9 +62,9 @@ std::optional<bigint> find_factor_quadratic_sieve(
                           << factor_base.back();
   auto candidates = perform_sieving(n, factor_base, params);
   BOOST_LOG_TRIVIAL(info) << "found " << candidates.size() << " candidates";
-  DixonsAlgorithm dixons_algorithm(n, factor_base);
-  dixons_algorithm.process_candidates(candidates);
-  return dixons_algorithm.find_factor();
+  FactorUsingCandidateCombination factor_using_combination(n, factor_base);
+  factor_using_combination.process_candidates(candidates);
+  return factor_using_combination.find_factor();
 }
 
 }  // namespace LargePrimeNumbers
