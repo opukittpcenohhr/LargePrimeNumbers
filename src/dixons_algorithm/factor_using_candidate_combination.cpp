@@ -64,18 +64,29 @@ void FactorUsingCandidateCombination::fill_powers_matrix(const bigint& r) {
   factorized_candidates_.push_back(r);
 }
 
-std::optional<bigint> FactorUsingCandidateCombination::get_factor_if_possible(
+bool FactorUsingCandidateCombination::is_row_corresponds_to_complete_square(
     size_t i) const {
   bool is_complete_square = true;
   for (size_t j = 0; j < factor_base_.size(); j++) {
     is_complete_square &= (matrix_[i][j] == 0);
   }
+  return is_complete_square;
+}
+
+bool FactorUsingCandidateCombination::is_row_corresponds_to_empty_subset(
+    size_t i) const {
   bool is_empty_row = true;
   for (size_t factor_index = 0; factor_index < factor_base_.size();
        factor_index++) {
     is_empty_row &= (matrix_[i][factor_base_.size() + factor_index] == 0);
   }
-  if (is_complete_square && !is_empty_row) {
+  return is_empty_row;
+}
+
+std::optional<bigint> FactorUsingCandidateCombination::get_factor_if_possible(
+    size_t i) const {
+  if (is_row_corresponds_to_complete_square(i) &&
+      !is_row_corresponds_to_empty_subset(i)) {
     bigint x = 1;
     bigint y = 1;
     for (size_t candidate_index = 0;
