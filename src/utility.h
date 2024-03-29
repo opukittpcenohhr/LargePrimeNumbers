@@ -49,7 +49,7 @@ T abs(const T& a) {
 }
 
 template <typename T>
-std::optional<T> check_potential_factor(const T& n, const T& factor) {
+std::optional<T> factor_with_gcd(const T& n, const T& factor) {
   assert(n >= 1);
   assert(factor >= 1);
   T g = gcd(n, factor);
