@@ -71,7 +71,7 @@ std::optional<bigint> DixonsAlgorithm::check_factor_candidate(size_t i) const {
     assert(((x) % n_) == ((y * y) % n_));
     x = boost::multiprecision::sqrt(x);
     assert(((x * x) % n_) == ((y * y) % n_));
-    if (auto factor = check_potential_factor<bigint>(n_, x + y)) {
+    if (auto factor = factor_with_gcd<bigint>(n_, x + y)) {
       return factor;
     }
   }

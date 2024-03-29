@@ -5,6 +5,7 @@
 #include <boost/log/trivial.hpp>
 #include <optional>
 
+#include "check_potential_factor.h"
 #include "common.h"
 #include "concepts.h"
 #include "data.h"
@@ -59,10 +60,7 @@ void test_find_factor(
       BOOST_LOG_TRIVIAL(info)
           << "Testing " << find_factor_test_name << ", number: " << number;
       auto some_factor = find_factor(number);
-      EXPECT_EQ(some_factor.has_value(), true);
-      EXPECT_NE(some_factor.value(), 1);
-      EXPECT_NE(some_factor.value(), number);
-      EXPECT_EQ(number % some_factor.value(), 0);
+      EXPECT_EQ(check_potential_factor(number, some_factor), 1);
       BOOST_LOG_TRIVIAL(info) << "Found factor: " << some_factor.value();
     }
   }
