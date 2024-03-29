@@ -31,4 +31,17 @@ bool is_fermat_pseudoprime(const bigint& n, std::span<const int> bases) {
   return true;
 }
 
+bool is_prime_fermat_test(const bigint& n, std::span<const int> bases) {
+  for (auto base : bases) {
+    if (gcd(n, base) > 1) {
+      if (factor_with_gcd<bigint>(n, base).has_value()) {
+        return false;
+      }
+    } else if (!is_fermat_pseudoprime_relative_to_base(n, base)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 }  // namespace LargePrimeNumbers
