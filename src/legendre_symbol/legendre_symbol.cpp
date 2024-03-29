@@ -14,11 +14,7 @@ int find_legendre_symbol(const bigint& n, const bigint& p) {
   }
   auto pow = powmod<bigint>(n % p, (p - 1) / 2, p);
   assert(pow == 1 || pow == p - 1);
-  if (pow == 1) {
-    return 1;
-  } else {
-    return -1;
-  }
+  return pow == 1 ? 1 : -1;
 }
 
 }  // namespace LargePrimeNumbers

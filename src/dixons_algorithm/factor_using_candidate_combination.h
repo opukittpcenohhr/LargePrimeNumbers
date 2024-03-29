@@ -44,6 +44,10 @@ private:
 
   void reset_factorization_powers_cache();
 
+  bool is_row_corresponds_to_complete_square(size_t i) const;
+
+  bool is_row_corresponds_to_empty_subset(size_t i) const;
+
   // Checks if number corresponding to i-th row of matrix can be used to find a
   // factor of n
   std::optional<bigint> get_factor_if_possible(size_t i) const;
