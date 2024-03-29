@@ -8,8 +8,7 @@ namespace LargePrimeNumbers {
 namespace {
 
 const bigint n = bigint("13");
-const bigint sqrt_n = bigint("3");
-const std::vector<BhascaraBrounkerSequenceItem> expected_items = {
+const std::vector<BhascaraBrounker::Item> expected_items = {
     {
         // 0
         .a = 0,
@@ -70,17 +69,10 @@ const std::vector<BhascaraBrounkerSequenceItem> expected_items = {
 }  // namespace
 
 TEST(BhascaraBrounkerSequence, test) {
-  std::vector<BhascaraBrounkerSequenceItem> sequence;
-  BhascaraBrounkerSequenceItem f, s;
-  std::tie(f, s) = get_initial_brounker_sequence_items(n, sqrt_n);
-  sequence.push_back(f);
-  sequence.push_back(s);
-  for (size_t i = 0; i < expected_items.size(); i++) {
-    if (i >= sequence.size()) {
-      sequence.push_back(generate_next_brounker_sequence_item_mod_n(
-          sequence[i - 1], sequence[i - 2], n, sqrt_n));
-    }
-    EXPECT_EQ(sequence[i], expected_items[i]);
+  auto iterable = BhascaraBrounker::get_first_item(n);
+  for (const auto& expected_item : expected_items) {
+    EXPECT_EQ(*iterable, expected_item);
+    ++iterable;
   }
 }
 
