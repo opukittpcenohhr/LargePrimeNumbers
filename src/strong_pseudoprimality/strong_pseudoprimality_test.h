@@ -6,8 +6,6 @@
 
 namespace LargePrimeNumbers {
 
-std::pair<size_t, bigint> find_highest_power(bigint n, const bigint& k);
-
 // Preconditions:
 // n is even
 // n is co-prime to base

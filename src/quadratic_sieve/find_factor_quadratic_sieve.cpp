@@ -8,11 +8,13 @@
 #include "find_congruence.h"
 #include "find_factor_base.h"
 
-namespace LargePrimeNumbers {
+namespace {
 
-std::vector<bigint> perform_sieving(
-    const bigint& n, const std::vector<size_t>& factor_base,
-    const QuadraticSieveParams& params) {
+std::vector<LargePrimeNumbers::bigint> perform_sieving(
+    const LargePrimeNumbers::bigint& n, const std::vector<size_t>& factor_base,
+    const LargePrimeNumbers::QuadraticSieveParams& params) {
+  using namespace LargePrimeNumbers;
+
   auto s = boost::multiprecision::sqrt(n) + 1;
   // We are considering a segment of [s, ... s + 2 * M)
   // so index i in array corresponds to r = i + s, and value to factor is f(r) =
@@ -54,6 +56,10 @@ std::vector<bigint> perform_sieving(
   }
   return candidates;
 }
+
+}  // namespace
+
+namespace LargePrimeNumbers {
 
 std::optional<bigint> find_factor_quadratic_sieve(
     const bigint& n, const QuadraticSieveParams& params) {

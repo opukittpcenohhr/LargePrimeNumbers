@@ -14,8 +14,9 @@ std::vector<size_t> find_factor_base(const bigint& n, size_t factors_count) {
   // numbers less than n, and around half of them have legendre symbol equal to
   // 1 -- so in our case 100 is sufficient for factors_count <= 10^6 for sure
 
-  std::vector<size_t> result{2};
+  std::vector<size_t> result;
   result.reserve(factors_count);
+  result.push_back(2);
 
   auto max_number_to_check = 100 * factors_count;
   std::vector<bool> is_prime(max_number_to_check + 1, true);
