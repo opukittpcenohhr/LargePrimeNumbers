@@ -16,13 +16,13 @@ namespace {
 template <LargePrimeNumbers::PrimalityTestWithBasesCount PrimalityTestFunc>
 void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
     PrimalityTestFunc primality_test, const std::string& test_name,
-    const std::vector<int>& bases, const std::vector<int>& log_ranges_begin,
+    const std::vector<int>& bases, const std::vector<int>& ranges_begin_log,
     const int range_len) {
   using namespace LargePrimeNumbers;
 
-  for (auto log_range_begin : log_ranges_begin) {
+  for (auto single_range_begin_log : ranges_begin_log) {
     bigint range_begin =
-        boost::multiprecision::pow(bigint(10), log_range_begin);
+        boost::multiprecision::pow(bigint(10), single_range_begin_log);
     bigint range_end = range_begin + range_len;
     std::vector<size_t> counts;
     std::vector<size_t> found_primes;
@@ -38,15 +38,15 @@ void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
       found_primes.push_back(detected_primes);
       BOOST_LOG_TRIVIAL(info)
           << "Benchmark " << test_name
-          << " pseudoprimality test, log_range_begin: " << log_range_begin
-          << " bases_count: " << bases_count
+          << " pseudoprimality test, single_range_begin_log: "
+          << single_range_begin_log << " bases_count: " << bases_count
           << " detected primes: " << detected_primes;
     }
 
     const std::string range_description =
-        "[10^{" + std::to_string(log_range_begin) + "}," + "10^{" +
-        std::to_string(log_range_begin) + "}+" + std::to_string(range_len) +
-        "]";
+        "[10^{" + std::to_string(single_range_begin_log) + "}," + "10^{" +
+        std::to_string(single_range_begin_log) + "}+" +
+        std::to_string(range_len) + "]";
     auto f = matplot::figure();
     f->size(1200, 800);
     matplot::plot(counts, found_primes);
@@ -76,14 +76,14 @@ int main() {
 
   // TODO(dumnov): make this cli arguments
   std::vector<int> bases = {2, 3, 5, 7, 9};
-  std::vector<int> log_ranges_begin = {6, 10, 20};
+  std::vector<int> ranges_begin_log = {6, 10, 20};
   int range_len = 2000000;
 
   plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
       LargePrimeNumbers::is_strong_pseudoprime, "Miller-Rabin", bases,
-      log_ranges_begin, range_len);
+      ranges_begin_log, range_len);
 
   plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
       LargePrimeNumbers::is_fermat_pseudoprime, "Fermat", bases,
-      log_ranges_begin, range_len);
+      ranges_begin_log, range_len);
 }
