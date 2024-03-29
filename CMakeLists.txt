@@ -28,6 +28,7 @@ include_directories(
 
 add_library(
   prime_numbers_library
+  src/random.cpp
   src/trial_primality_test.cpp
   src/trial_find_factor.cpp
   src/quadratic_sieve/find_congruence.cpp
