@@ -5,21 +5,25 @@
 
 namespace LargePrimeNumbers {
 
+// Precondition: T is an multiprecision integer type
 template <typename T>
 T addmod(const T& a, const T& b, const T& mod) {
   return (a + b) % mod;
 }
 
+// Precondition: T is an multiprecision integer type
 template <typename T>
 T submod(const T& a, const T& b, const T& mod) {
   return ((a - b) % mod + mod) % mod;
 }
 
+// Precondition: T is an multiprecision integer type
 template <typename T>
 T mulmod(const T& a, const T& b, const T& mod) {
   return (a * b) % mod;
 }
 
+// Precondition: b >= 0
 template <typename T>
 T powmod(T a, T b, const T& mod) {
   assert(b >= 0);
@@ -34,6 +38,7 @@ T powmod(T a, T b, const T& mod) {
   return res;
 }
 
+// Precondition: a, b >= 0
 template <typename T>
 T gcd(const T& a, const T& b) {
   if (b == 0) {
