@@ -42,11 +42,11 @@ bigint find_v(bigint ind, bigint p, bigint h, bigint n, bigint v1, bigint v2) {
 }  // namespace
 
 bigint find_congruence(const bigint& n, const bigint& p) {
-  auto rng = RandomBigintGenerator(239);
+  auto rng = RandomBigint(239);
 
   bigint h = -1;
   while (h == -1) {
-    auto candidate = rng.generate_uniform_random(0, p - 1);
+    auto candidate = rng.generate_uniform(0, p - 1);
     bigint legendre_symbol_enumerator = bigint(candidate * candidate) - 4 * n;
     legendre_symbol_enumerator = ((legendre_symbol_enumerator % p) + p) % p;
     if (find_legendre_symbol(legendre_symbol_enumerator, p) == -1) {

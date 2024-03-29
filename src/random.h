@@ -6,16 +6,12 @@
 
 namespace LargePrimeNumbers {
 
-class RandomBigintGenerator {
+class RandomBigint {
 public:
-  RandomBigintGenerator(int seed) : mt_(seed) {}
+  explicit RandomBigint(uint32_t seed);
 
   // generate random number in [min, max]
-  bigint generate_uniform_random(const bigint& min, const bigint& max) {
-    assert(min <= max);
-    boost::uniform_int<bigint> gen(min, max);
-    return gen(mt_);
-  }
+  bigint generate_uniform(const bigint& min, const bigint& max);
 
 private:
   boost::mt19937 mt_;
