@@ -5,9 +5,8 @@
 
 namespace LargePrimeNumbers {
 
-PollardRhoOneResult pollard_rho_one(const bigint& n,
-                                    std::optional<size_t> max_iterations,
-                                    int base) {
+PollardRhoOneResult pollard_rho_one(
+    const bigint& n, std::optional<size_t> max_iterations, int base) {
   BOOST_LOG_TRIVIAL(info) << "finding factors of " << n
                           << " using pollard rho one, base: " << base;
   bigint current_pow(base);
@@ -37,7 +36,7 @@ PollardRhoOneResult pollard_rho_one(const bigint& n,
 std::optional<bigint> find_factor_pollard_rho_one(
     const bigint& n, const PollardRhoOneParams& params) {
   for (auto base : params.bases) {
-    if (auto factor = check_potential_factor<bigint>(n, base)) {
+    if (auto factor = factor_with_gcd<bigint>(n, base)) {
       return factor.value();
     }
   }

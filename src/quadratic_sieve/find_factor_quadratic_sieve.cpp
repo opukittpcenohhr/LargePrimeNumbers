@@ -17,7 +17,7 @@ std::vector<bigint> perform_sieving(
   // We are considering a segment of [s, ... s + 2 * M)
   // so index i in array corresponds to r = i + s, and value to factor is f(r) =
   // r * r mod n
-  auto prime_factors_log_sum = std::vector<double>(2 * params.M);
+  auto prime_factors_log_sum = std::vector<float>(2 * params.M);
 
   for (auto p : factor_base) {
     auto congruences = find_all_congruences(n, p);
