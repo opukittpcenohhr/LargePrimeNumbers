@@ -6,6 +6,10 @@
 
 namespace LargePrimeNumbers {
 
+bool is_prime_trial(const bigint& x) {
+  return !find_factor_trial(x).has_value();
+}
+
 std::optional<bigint> find_factor_trial(const bigint& n) {
   if (n % 2 == 0 && n > 2) {
     return 2;

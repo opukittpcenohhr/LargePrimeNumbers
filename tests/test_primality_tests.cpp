@@ -3,7 +3,7 @@
 #include "fermat_pseudoprimality_test.h"
 #include "strong_pseudoprimality_test.h"
 #include "testing_utility.h"
-#include "trial_primality_test.h"
+#include "trial_find_factor.h"
 
 namespace LargePrimeNumbers {
 
@@ -11,8 +11,8 @@ TEST(TrialPrimalityTest, test) {
   const std::set<bigint> kFalsePositives = {};
   const bigint kMaxNumberToTest = boost::multiprecision::pow(bigint(10), 10);
 
-  test_primality_test(is_prime_trial, "is_prime_trial", kFalsePositives,
-                      kMaxNumberToTest);
+  test_primality_test(
+      is_prime_trial, "is_prime_trial", kFalsePositives, kMaxNumberToTest);
 }
 
 TEST(FermatPseudoprimalityTest, test) {
@@ -33,8 +33,8 @@ TEST(FermatPseudoprimalityTest, test) {
     return is_fermat_pseudoprime(n, kTestBases);
   };
 
-  test_primality_test(test_is_fermat_pseudoprime, "is_fermat_pseudoprime",
-                      kCarmichaelNumbers);
+  test_primality_test(
+      test_is_fermat_pseudoprime, "is_fermat_pseudoprime", kCarmichaelNumbers);
 }
 
 TEST(StrongPseudoprimalityTest, test) {
@@ -45,8 +45,8 @@ TEST(StrongPseudoprimalityTest, test) {
     return is_strong_pseudoprime(n, kTestBases);
   };
 
-  test_primality_test(test_is_strong_pseudoprime, "is_strong_pseudoprime",
-                      kFalsePositives);
+  test_primality_test(
+      test_is_strong_pseudoprime, "is_strong_pseudoprime", kFalsePositives);
 }
 
 }  // namespace LargePrimeNumbers

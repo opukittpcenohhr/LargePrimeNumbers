@@ -1,30 +1,18 @@
 #include "strong_pseudoprimality_test.h"
 
 #include "common.h"
+#include "find_highest_power_of.h"
 #include "utility.h"
 
 namespace LargePrimeNumbers {
 
-std::pair<size_t, bigint> find_highest_power(bigint n, const bigint& k) {
-  assert(k != 1);
-  assert(n != 0);
-  size_t res = 0;
-  while (n % k == 0) {
-    res++;
-    n /= k;
-  }
-  return {res, n};
-}
-
 bool is_strong_pseudoprime_relative_to_base(const bigint& n, int base) {
-  size_t a;
-  bigint t;
-  std::tie(a, t) = find_highest_power(n - 1, 2);
-  auto current_pow = powmod<bigint>(base, t, n);
+  auto highest_power = find_highest_power_of(n - 1, 2);
+  auto current_pow = powmod<bigint>(base, highest_power.remainder, n);
   if (current_pow == 1 || current_pow == n - 1) {
     return true;
   }
-  for (size_t i = 0; i + 1 < a; i++) {
+  for (size_t i = 0; i + 1 < highest_power.degree; i++) {
     current_pow = mulmod(current_pow, current_pow, n);
     if (current_pow == n - 1) {
       return true;
