@@ -11,13 +11,9 @@
 #include "fermat_pseudoprimality_test.h"
 #include "strong_pseudoprimality_test.h"
 
-template <typename T>
-concept PrimalityTestWithBasesCount = requires(
-    T func, std::span<const int> bases, const LargePrimeNumbers::bigint& arg) {
-  { func(arg, bases) } -> std::same_as<bool>;
-};
+namespace {
 
-template <PrimalityTestWithBasesCount PrimalityTestFunc>
+template <LargePrimeNumbers::PrimalityTestWithBasesCount PrimalityTestFunc>
 void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
     PrimalityTestFunc primality_test, const std::string& test_name,
     const std::vector<int>& bases, const std::vector<int>& log_ranges_begin,
@@ -68,6 +64,8 @@ void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
     matplot::save(filename);
   }
 }
+
+}  // namespace
 
 int main() {
   using namespace LargePrimeNumbers;
