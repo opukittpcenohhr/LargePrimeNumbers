@@ -15,6 +15,22 @@ TEST(TrialPrimalityTest, test) {
       is_prime_trial, "is_prime_trial", kFalsePositives, kMaxNumberToTest);
 }
 
+TEST(FermatPrimalityTest, test) {
+  const static std::set<bigint> kExclusions = {
+      512461,
+      bigint("464052305161"),
+  };
+  const std::array<int, 11> kTestBases = {2,  3,  5,  7,  9, 11,
+                                          13, 17, 19, 23, 29};
+
+  auto test_is_prime_fermat_test = [&kTestBases](const bigint &n) {
+    return is_prime_fermat_test(n, kTestBases);
+  };
+
+  test_primality_test(
+      test_is_prime_fermat_test, "is_fermat_prime", kExclusions);
+}
+
 TEST(FermatPseudoprimalityTest, test) {
   const static std::set<bigint> kCarmichaelNumbers = {
       561,
@@ -27,6 +43,7 @@ TEST(FermatPseudoprimalityTest, test) {
       bigint("7156857700403137441"),
       bigint("1791562810662585767521"),
   };
+
   const std::array<int, 6> kTestBases = {2, 3, 5, 7, 9, 11};
 
   auto test_is_fermat_pseudoprime = [&kTestBases](const bigint &n) {

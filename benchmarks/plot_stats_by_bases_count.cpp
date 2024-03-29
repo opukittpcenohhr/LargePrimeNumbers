@@ -51,12 +51,12 @@ void plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
     f->size(1200, 800);
     matplot::plot(counts, found_primes);
     matplot::xlabel("Number of bases");
-    matplot::ylabel("Number of pseudoprimes detected");
-    std::string filename = "benchmark_charts/" + test_name +
-                           "_pseudoprimality_" + range_description + ".png";
+    matplot::ylabel("Number of potential primes detected");
+    std::string filename = "benchmark_charts/" + test_name + "_primality_" +
+                           range_description + ".png";
     matplot::title(
-        "Number of pseudoprimes detected by " + test_name +
-        " pseudoprimality test for "
+        "Number of potential primes detected by " + test_name +
+        " primality test for "
         "different number of bases  "
         "for numbers in "
         "range " +
@@ -84,6 +84,6 @@ int main() {
       ranges_begin_log, range_len);
 
   plot_detected_pseudoprimes_vs_bases_count_for_pseudoprimality_test(
-      LargePrimeNumbers::is_fermat_pseudoprime, "Fermat", bases,
+      LargePrimeNumbers::is_prime_fermat_test, "Fermat", bases,
       ranges_begin_log, range_len);
 }
