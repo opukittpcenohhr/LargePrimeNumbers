@@ -5,9 +5,37 @@
 
 namespace LargePrimeNumbers {
 
-std::pair<BhascaraBrounkerSequenceItem, BhascaraBrounkerSequenceItem>
-get_initial_brounker_sequence_items(const bigint& n, const bigint& sqrt_n) {
-  return {
+const BhascaraBrounker::Item& BhascaraBrounker::Iterable::operator*() const {
+  return current_;
+}
+
+const BhascaraBrounker::Item* BhascaraBrounker::Iterable::operator->() const {
+  return &current_;
+}
+
+BhascaraBrounker::Iterable& BhascaraBrounker::Iterable::operator++() {
+  bigint a_new_next = (sqrt_n_ + next_.b) / next_.c;
+  bigint b_new_next = a_new_next * next_.c - next_.b;
+  bigint c_new_next = current_.c + a_new_next * (next_.b - b_new_next);
+  auto p_new_next =
+      addmod<bigint>(mulmod<bigint>(a_new_next, next_.p, n_), current_.p, n_);
+  current_ = next_;
+  next_ = {
+      .a = a_new_next,
+      .b = b_new_next,
+      .c = c_new_next,
+      .p = p_new_next,
+  };
+  return *this;
+}
+
+BhascaraBrounker::Iterable BhascaraBrounker::get_first_item(const bigint& n) {
+  return BhascaraBrounker::get_first_item(n, boost::multiprecision::sqrt(n));
+}
+
+BhascaraBrounker::Iterable BhascaraBrounker::get_first_item(
+    const bigint& n, const bigint& sqrt_n) {
+  return BhascaraBrounker::Iterable(
       {
           // 0-th item
           .a = 0,
@@ -21,24 +49,8 @@ get_initial_brounker_sequence_items(const bigint& n, const bigint& sqrt_n) {
           .b = sqrt_n,
           .c = n - sqrt_n * sqrt_n,
           .p = sqrt_n,
-      }};
-}
-
-BhascaraBrounkerSequenceItem generate_next_brounker_sequence_item_mod_n(
-    const BhascaraBrounkerSequenceItem& current_item,
-    const BhascaraBrounkerSequenceItem& previous_item, const bigint& n,
-    const bigint& sqrt_n) {
-  auto a_next = (sqrt_n + current_item.b) / current_item.c;
-  auto b_next = a_next * current_item.c - current_item.b;
-  auto c_next = previous_item.c + a_next * (current_item.b - b_next);
-  auto tmp = mulmod<bigint>(a_next, current_item.p, n);
-  auto p_next = addmod<bigint>(tmp, previous_item.p, n);
-  return {
-      .a = a_next,
-      .b = b_next,
-      .c = c_next,
-      .p = p_next,
-  };
+      },
+      n, sqrt_n);
 }
 
 }  // namespace LargePrimeNumbers
