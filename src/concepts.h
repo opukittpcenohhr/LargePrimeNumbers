@@ -23,4 +23,11 @@ concept PrimalityTestWithBasesCount = requires(
   { func(arg, bases) } -> std::same_as<bool>;
 };
 
+template <typename T>
+concept SomeOptional = requires {
+  typename std::decay_t<T>;
+  requires std::is_same_v<
+      std::decay_t<T>, std::optional<typename std::decay_t<T>::value_type>>;
+};
+
 }  // namespace LargePrimeNumbers

@@ -5,6 +5,7 @@
 #include <random>
 
 #include "common.h"
+#include "concepts.h"
 #include "f2_matrix.h"
 #include "legendre_symbol.h"
 #include "utility.h"
@@ -90,7 +91,7 @@ std::optional<bigint> FactorUsingCandidateCombination::get_factor_if_possible(
     assert(((x) % n_) == ((y * y) % n_));
     x = boost::multiprecision::sqrt(x);
     assert(((x * x) % n_) == ((y * y) % n_));
-    if (auto factor = factor_with_gcd<bigint>(n_, x + y)) {
+    if (SomeOptional auto factor = factor_with_gcd<bigint>(n_, x + y)) {
       return factor;
     }
   }
@@ -102,7 +103,7 @@ std::optional<bigint> FactorUsingCandidateCombination::find_factor() {
                           << factorized_candidates_.size();
   reduce_to_row_echelon_form(factor_base_.size(), matrix_);
   for (size_t i = 0; i < factorized_candidates_.size(); i++) {
-    if (auto factor = get_factor_if_possible(i)) {
+    if (SomeOptional auto factor = get_factor_if_possible(i)) {
       return factor.value();
     }
   }
