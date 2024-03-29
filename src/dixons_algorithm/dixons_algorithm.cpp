@@ -99,7 +99,7 @@ bool DixonsAlgorithm::factored_enough_candidates() const {
 std::optional<bigint> DixonsAlgorithm::find_factor() {
   BOOST_LOG_TRIVIAL(info) << "number of completely factorized candidates : "
                           << factorized_candidates_.size();
-  perform_gaussian_elimination(matrix_, factor_base_.size());
+  reduce_to_row_echelon_form(factor_base_.size(), matrix_);
   for (size_t i = 0; i < factorized_candidates_.size(); i++) {
     if (auto factor = check_factor_candidate(i)) {
       return factor.value();
